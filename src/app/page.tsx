@@ -1,7 +1,7 @@
 'use client'
 
-import { useEffect, useState } from "react"
-import { StaffSection } from "./staffSection"
+import { useState } from "react"
+import { StaffText } from "./staffText"
 
 
 
@@ -19,7 +19,7 @@ export default function Page() {
 
       <button onClick={clickButtonStaff} className="p-3 bg-purple-800 rounded-md">Clique aqui para adicionar mais um</button>
 
-      {isStaff ? <StaffSection /> : ""}
+      {isStaff ? <StaffText /> : ""}
     </div>
   )
 }
