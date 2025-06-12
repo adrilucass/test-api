@@ -1,25 +1,40 @@
 'use client'
 
-import { useState } from "react"
-import { StaffText } from "./staffText"
+import axios from "axios"
+import { useEffect, useState } from "react"
 
-
+interface arrayProps {
+  userId: number,
+  id: number,
+  title: number,
+  body: string
+}
 
 export default function Page() {
+  const [data, setData] = useState([])
 
-  const[isStaff, setStaff] = useState(false)
+  useEffect(() => {
+    async function GetData() {
+      const api = await axios.get("https://jsonplaceholder.typicode.com/posts")
+      setData(api.data)
+    }
 
-  function clickButtonStaff() {
-    setStaff(true)
-  }
+    GetData()
+  }, [])
 
-  return(
-    <div className="h-dvh flex flex-col justify-center items-center gap-5">
-      <h1 className="text-2xl font-bold">O numero atual é </h1>
 
-      <button onClick={clickButtonStaff} className="p-3 bg-purple-800 rounded-md">Clique aqui para adicionar mais um</button>
 
-      {isStaff ? <StaffText /> : ""}
-    </div>
+  return (
+    <main>
+      {
+        data.map((props: arrayProps) => (
+          <div key={props.id}>
+            <h1>{props.userId}</h1>
+            <h1>{props.title}</h1>
+            <h1>{props.body}</h1>
+          </div>
+        ))
+      }
+    </main>
   )
 }
